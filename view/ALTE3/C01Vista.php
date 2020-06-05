@@ -9,7 +9,7 @@
 		<!-- DataTables -->
   		<link rel="stylesheet" href="/<?php echo DIR_LOCAL; ?>/library/ALTE3/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
 	</head>
-	<body class="hold-transition layout-top-nav">
+	<body class="hold-transition layout-top-nav text-sm">
 		<form action="" id="frm_cero" name="frm_cero"  method="post">
 			<?php include 'modulos/Cuestionario/EnFrmCero.php';?>
 		</form>
@@ -31,6 +31,23 @@
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title"><?php echo TIT_LARGO; ?></h3>
+									<div class="card-tools">
+										<ul class="nav nav-pills ml-auto">
+											<li class="nav-item">
+												
+												<div class="btn-group dropleft">
+													<?php if($controlador_obj->tienePermiso("nuevo_cuest") && $controlador_obj->tienePermiso("escritura")){?>
+													<a href="<?php echo url_controlador("cuestionario", "nuevo", true, true)?>" type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Nuevo cuestionario</a>
+													<?php }?>
+													<?php if($controlador_obj->tienePermiso("exportar")){?>
+													<a href="<?php echo url_controlador("cuestionario", "exportar", array("formato"=>"xls"), true, true)?>" type="button" class="btn btn-default btn-sm"><i class="fas fa-file-excel"></i> Exportar</a>
+													<?php }?>
+													
+												</div>
+												
+											</li>
+										</ul>
+									</div>
 								</div><!-- /.card-header -->
 								<div class="card-body">
 									<table id="tbl_cuest_vista" class="table table-bordered table-striped table-hover">

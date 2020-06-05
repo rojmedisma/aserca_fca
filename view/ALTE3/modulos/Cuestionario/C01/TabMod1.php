@@ -1,6 +1,6 @@
 <!-- tab_generales -->
 	<h4>Datos Generales del Centro de Acopio</h4>
-	<h5 class="text-secondary">I Datos de la organización</h5>
+	<h5 class="text-secondary">I Datos del centro de acopio</h5>
 	<div class="row">
 		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('persona_tipo', 'persona_tipo', array('lbl_txt'=>'Tipo de persona')); ?></div>
 	</div>
@@ -15,8 +15,8 @@
 	<?php echo $controlador_obj->tag_campo->label('Nombre de la o el representante');?>
 	<div class="row">
 		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('repre_nombre',array('lbl_txt'=>'Nombre')); ?></div>
-		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('repre_ap_paterno',array('lbl_txt'=>'Apellido')); ?></div>
-		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('repre_ap_materno',array('lbl_txt'=>'Apellido')); ?></div>
+		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('repre_ap_paterno',array('lbl_txt'=>'Apellido paterno')); ?></div>
+		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('repre_ap_materno',array('lbl_txt'=>'Apellido materno')); ?></div>
 	</div>
 	<h5 class="text-secondary">II Datos de ubicación de la organización</h5>
 	<div class="row">
@@ -24,11 +24,14 @@
 		<div class="col-md-3"><?php echo $controlador_obj->tag_campo->cmpSelectDeTbl('ubica_municipio', 'cat_municipio', 'cat_municipio_id', 'descripcion', $controlador_obj->and_estado, array('lbl_txt'=>'Municipio')) ?></div>
 		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpTexto('ubica_localidad_desc',array('lbl_txt'=>'Localidad')); ?></div>
 	</div>
+	<div class="row">
+		<div class="col-md-12"><?php echo $controlador_obj->tag_campo->cmpTexto('ubica_domicilio',array('lbl_txt'=>'Domicilio')); ?></div>
+	</div>
 	<h5 class="text-secondary">III Datos de contacto</h5>
 	<div class="row">
 		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contacto_correo',array('lbl_txt'=>'Correo electrónico')); ?></div>
 		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contacto_telefono',array('lbl_txt'=>'Teléfono')); ?></div>
-		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contact_whapp',array('lbl_txt'=>'Num. para whapp')); ?></div>
+		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contact_whapp',array('lbl_txt'=>'Número de WhatsApp')); ?></div>
 	</div>
 	<h5 class="text-secondary">IV Número de socios</h5>
 	<div class="row">
@@ -43,6 +46,6 @@
 	</div>
 	<h5 class="text-secondary">VI Área de cobertura</h5>
 	<div class="row">
-		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpSelectDeTbl('cobertura_municipio', 'cat_municipio', 'cat_municipio_id', 'descripcion', '', array('lbl_txt'=>'Nombre del  Municipio donde brinda servicio')) ?></div>
+		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpSelectDeTbl('cobertura_municipio', 'cat_municipio', 'cat_municipio_id', 'descripcion', $controlador_obj->and_estado, array('lbl_txt'=>'Nombre del  Municipio donde brinda servicio')) ?></div>
 		<div class="col-md-3"><?php echo $controlador_obj->tag_campo->cmpNum('cobertura_km', 0, array('lbl_txt'=>'Núm. Kilometros de cobertura')); ?></div>
 	</div>

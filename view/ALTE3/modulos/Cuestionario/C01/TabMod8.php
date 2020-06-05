@@ -1,6 +1,6 @@
 <!-- tab_m07 (Pestaña 7, Módulo 8) -->
 	<h5>Séptimo componente de la autoevaluación.</h5>
-	<h4>7. Sistemas de control y riesgo</h4>
+	<h4>7. Sistemas de control y riesgos</h4>
 	<h5 class="text-secondary">1. Sistema administrativo</h5>
 	<div class="row">
 		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m7p1', 'm7p1', array('lbl_txt'=>$controlador_obj->getCuesCmpDef('m7p1','lbl_txt'))); ?></div>

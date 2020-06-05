@@ -1,0 +1,14 @@
+;	*	*	Para un nuevo proyecto:
+;1 Crear el archivo .gitignore
+;2 Crear nuevo repositorio en github
+
+
+;3 Ejecutar los siguientes comandos
+;Pasos para subir
+git init
+git pull https://github.com/rojmedisma/inaes_lb.git master
+git add .
+git status
+git commit -m 'Versión Demo. Captura de cuestionario funcional con despliegue de reporte General'
+git remote add origin https://github.com/rojmedisma/inaes_lb.git master
+git push -u origin master

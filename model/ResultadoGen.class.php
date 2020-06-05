@@ -4,7 +4,7 @@
  * @author Ismael Rojas
  *
  */
-class Indicador{
+class ResultadoGen{
 	private $cat_cuestionario_id;
 	private $arr_cmps_frm = array();
 	private $arr_res_cuest_modulo = array();
@@ -88,7 +88,8 @@ class Indicador{
 					$valor_x_cmpte =$valoracion_tot*$valor_maximo;
 					
 				}
-				$porcentaje=@(($valor_x_cmpte/$valor_maximo)*100);
+				//$porcentaje=@(($valor_x_cmpte/$valor_maximo)*100);
+				$porcentaje = op_division($valor_x_cmpte, $valor_maximo) * 100;
 				$arr_res_reg[] = array(
 						"cat_cuest_modulo"=>array(
 								"cat_cuest_modulo_id"=>$cat_cuest_modulo_id,
@@ -117,25 +118,25 @@ class Indicador{
 		//1. Diseño de objetivos estratégicos
 		$m1cmpte1_peso = 10;
 		$m1cmpte1_suma = $m1p1+$m1p2;
-		$m1cmpte1_valo = @($m1cmpte1_suma/$m1cmpte1_peso);
+		$m1cmpte1_valo = op_division($m1cmpte1_suma,$m1cmpte1_peso);
 		$this->agregaArrSubResultado("1", "1. Diseño de objetivos estratégicos", $m1cmpte1_peso, $m1cmpte1_suma);
 		
 		//2. Planificación estratégica
-		$m1cmpte2_peso = 50;
+		$m1cmpte2_peso = 25;
 		$m1cmpte2_suma = $m1p3+$m1p4+$m1p5+$m1p6+$m1p7;
-		$m1cmpte2_valo = @($m1cmpte2_suma/$m1cmpte2_peso);
+		$m1cmpte2_valo = op_division($m1cmpte2_suma,$m1cmpte2_peso);
 		$this->agregaArrSubResultado("2", "2. Planificación estratégica", $m1cmpte2_peso, $m1cmpte2_suma);
 		
 		//3. Implementación estrátegica
 		$m1cmpte3_peso = 10;
 		$m1cmpte3_suma = $m1p8+$m1p9;
-		$m1cmpte3_valo = @($m1cmpte3_suma/$m1cmpte3_peso);
+		$m1cmpte3_valo = op_division($m1cmpte3_suma,$m1cmpte3_peso);
 		$this->agregaArrSubResultado("3", "3. Implementación estrátegica", $m1cmpte3_peso, $m1cmpte3_suma);
 		
 		//Total
 		$m1_peso_tot = 45;
 		$m1_suma_tot = $m1cmpte1_suma+$m1cmpte2_suma+$m1cmpte3_suma;
-		$m1_valo_tot = @($m1_suma_tot/$m1_peso_tot);
+		$m1_valo_tot = op_division($m1_suma_tot,$m1_peso_tot);
 		$this->agregaArrSubResultado("", "", $m1_peso_tot, $m1_suma_tot);
 	}
 	/**
@@ -203,24 +204,50 @@ class Indicador{
 		
 		if(intval($persona_tipo)){
 			if(intval($persona_tipo)==1){
-				//Tipo 1. Personas físicas
-				$cmpte_id="1";
-				$cmpte_tit = "Tipo 1. Personas físicas";
-				$m4cmpte_peso = 30;
-				$m4cmpte_suma = $m4p1 + $m4p2r1 + $m4p2r2 + $m4p2r3 + $m4p2r4 + $m4p3;
+				//1. Junta de gobierno
+				$m4cmpte1_peso = 5;
+				$m4cmpte1_suma = $m4p1;
+				$this->agregaArrSubResultado("1", "1. Junta de gobierno", $m4cmpte1_peso, $m4cmpte1_suma);
+				
+				//2. Transparencia
+				$m4cmpte2_peso = 20;
+				$m4cmpte2_suma = $m4p2r1 + $m4p2r2 + $m4p2r3 + $m4p2r4;
+				$this->agregaArrSubResultado("2", "2. Transparencia", $m4cmpte2_peso, $m4cmpte2_suma);
+				
+				//3. Conformación legal
+				$m4cmpte3_peso = 5;
+				$m4cmpte3_suma = $m4p3;
+				$this->agregaArrSubResultado("3", "3. Conformación legal", $m4cmpte3_peso, $m4cmpte3_suma);
+				
+				//Total
+				$m4_peso_tot = 30;
+				$m4_suma_tot = $m4cmpte1_suma + $m4cmpte2_suma + $m4cmpte3_suma;
+				$this->agregaArrSubResultado("", "", $m4_peso_tot, $m4_suma_tot);
+				
+				
 			}elseif(intval($persona_tipo)==2){
-				//Tipo 2. Personas morales (organizaciones)
-				$cmpte_id="2";
-				$cmpte_tit = "Tipo 2. Personas morales (organizaciones)";
-				$m4cmpte_peso = 35;
-				$m4cmpte_suma = $m4p4r1 + $m4p4r2 + $m4p4r3 + $m4p5r1 + $m4p5r2 + $m4p5r3 + $m4p6;
+				//1. Órganos representativos
+				$m4cmpte1_peso = 15;
+				$m4cmpte1_suma = $m4p4r1 + $m4p4r2 + $m4p4r3;
+				$this->agregaArrSubResultado("1", "1. Órganos representativos", $m4cmpte1_peso, $m4cmpte1_suma);
+				
+				//2. Control y gobierno
+				$m4cmpte2_peso = 15;
+				$m4cmpte2_suma = $m4p5r1 + $m4p5r2 + $m4p5r3;
+				$this->agregaArrSubResultado("2", "2. Control y gobierno", $m4cmpte2_peso, $m4cmpte2_suma);
+				
+				//3. Transparencia
+				$m4cmpte3_peso = 5;
+				$m4cmpte3_suma = $m4p6;
+				$this->agregaArrSubResultado("3", "3. Transparencia", $m4cmpte3_peso, $m4cmpte3_suma);
+				
+				//Total
+				$m4_peso_tot = 30;
+				$m4_suma_tot = $m4cmpte1_suma + $m4cmpte2_suma + $m4cmpte3_suma;
+				$this->agregaArrSubResultado("", "", $m4_peso_tot, $m4_suma_tot);
+				
 			}
-			$this->agregaArrSubResultado($cmpte_id, $cmpte_tit, $m4cmpte_peso, $m4cmpte_suma);
 			
-			//Total
-			$m4_peso_tot = $m4cmpte_peso;
-			$m4_suma_tot = $m4cmpte_suma;
-			$this->agregaArrSubResultado("", "", $m4_peso_tot, $m4_suma_tot);
 		}
 		
 	}
@@ -276,18 +303,32 @@ class Indicador{
 		extract($arr_cmps_frm, EXTR_OVERWRITE);
 		
 		//1. Recursos financieros
-		$m6cmpte1_peso = 10;
-		$m6cmpte1_suma = $m6p1 + $m6p2 + $m6p3;
+		$m6cmpte1_peso = 25;
+		$m6cmpte1_suma = $m6p1 + $m6p2 + $m6p3 + $m6p4 + $m6p5;
 		$this->agregaArrSubResultado("1", "1. Recursos financieros", $m6cmpte1_peso, $m6cmpte1_suma);
 		
-		//2. Estructura administrativa, financiera y contable
-		$m6cmpte2_peso = 20;
-		$m6cmpte2_suma = $m6p4 + $m6p5r1 + $m6p5r2 + $m6p6;
-		$this->agregaArrSubResultado("2", "2. Estructura administrativa, financiera y contable", $m6cmpte2_peso, $m6cmpte2_suma);
+		//2. Estructura del área administrativa, financiera y contable
+		$m6cmpte2_peso = 15;
+		$m6cmpte2_suma = $m6p6 + $m6p7 + $m6p8;
+		$this->agregaArrSubResultado("2", "2. Estructura del área administrativa, financiera y contable", $m6cmpte2_peso, $m6cmpte2_suma);
 		
+		//3. Análisis de estados financieros
+		$m6cmpte3_peso = 20;
+		$m6cmpte3_suma = $m6p9 + $m6p10 + $m6p11r1 + $m6p11r2;
+		$this->agregaArrSubResultado("3", "3. Análisis de estados financieros", $m6cmpte3_peso, $m6cmpte3_suma);
+		
+		//4. Historial crediticio
+		$m6cmpte4_peso = 15;
+		$m6cmpte4_suma = $m6p12 + $m6p13 + $m6p14;
+		$this->agregaArrSubResultado("4", "4. Historial crediticio", $m6cmpte4_peso, $m6cmpte4_suma);
+		
+		//5. Administración de riesgos
+		$m6cmpte5_peso = 25;
+		$m6cmpte5_suma = $m6p15 + $m6p16r1 + $m6p16r2 + $m6p17 + $m6p18;
+		$this->agregaArrSubResultado("5", "5. Administración de riesgos", $m6cmpte5_peso, $m6cmpte5_suma);
 		//Total
-		$m6_peso_tot = 30;
-		$m6_suma_tot = $m6cmpte1_suma + $m6cmpte2_suma;
+		$m6_peso_tot = 100;
+		$m6_suma_tot = $m6cmpte1_suma + $m6cmpte2_suma + $m6cmpte3_suma + $m6cmpte4_suma + $m6cmpte5_suma;
 		$this->agregaArrSubResultado("", "", $m6_peso_tot, $m6_suma_tot);
 	}
 	/**
@@ -367,7 +408,7 @@ class Indicador{
 		}
 		//Si no se manda el argumento de valoración, entonces se hace la operación básica (suma/peso)
 		if($valoracion==NULL){
-			$valoracion = @($suma/$peso);
+			$valoracion = op_division($suma, $peso);
 		}
 		$arr_sub_res = array(
 				"cmpte_tit"=>$cmpte_tit,

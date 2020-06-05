@@ -7,7 +7,7 @@
 	<head>
 		<?php include_once 'modulos/EnHead.php'; ?>
 	</head>
-	<body class="hold-transition layout-top-nav">
+	<body class="hold-transition layout-top-nav text-sm">
 		<form action="" id="frm_cero" name="frm_cero"  method="post">
 			<?php include 'modulos/Cuestionario/EnFrmCero.php';?>
 		</form>
@@ -38,11 +38,27 @@
 										<div class="row">
 											<div class="col-5 col-sm-3">
 												<div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">
-													<a class="nav-link" id="tab_instrucciones_tab" data-toggle="pill" href="#tab_instrucciones" role="tab" aria-controls="vert-tabs-home" aria-selected="true">Instrucciones de llenado</a>
+													<a class="nav-link" id="tab_instrucciones_tab" data-toggle="pill" href="#tab_instrucciones" role="tab" aria-controls="vert-tabs-home" aria-selected="true"><i class="fas fa-info-circle mr-1"></i>Instrucciones de llenado</a>
 													<?php foreach ($controlador_obj->getArrTblCatCuestModulo() as $arr_det_mod){?>
-													<a class="nav-link" id="tab_mod<?php echo $arr_det_mod['cat_cuest_modulo_id']?>_tab" href="<?php echo url_controlador("cuestionario","forma", array("cat_cuest_modulo_id"=>$arr_det_mod['cat_cuest_modulo_id']), true, true) ?>" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><?php echo $arr_det_mod['descripcion']; ?></a>
+													<a class="nav-link" id="tab_mod<?php echo $arr_det_mod['cat_cuest_modulo_id']?>_tab" href="<?php echo url_controlador("cuestionario","forma", array("cat_cuest_modulo_id"=>$arr_det_mod['cat_cuest_modulo_id'], "de_tab"=>true), true, true) ?>" role="tab" aria-controls="vert-tabs-home" aria-selected="false">
+														<?php 
+														echo $arr_det_mod['descripcion']." ";
+														$cat_cuest_modulo_id = $arr_det_mod['cat_cuest_modulo_id'];
+														if($controlador_obj->esModuloActivo($cat_cuest_modulo_id)){
+															$tot_alertas = intval($controlador_obj->getValorCatCuestModuloControl($cat_cuest_modulo_id, 'tot_alertas'));
+															if($tot_alertas){
+																echo '<span class="badge badge-warning"><i class="fas fa-exclamation-triangle"></i> '.$tot_alertas.'</span>';
+															}else{
+																echo '<span class="badge badge-success"><i class="fas fa-check"></i></span>';
+															}
+														}else{?>
+														<span class="right badge badge-primary">Nuevo</span>
+														<?php }?>
+													</a>
 													<?php }?>
-													<a class="nav-link" id="tab_resultados_tab" href="<?php echo url_controlador("cuestionario","resultado", array("cat_cuest_modulo_id"=>""), true, true) ?>" role="tab" aria-controls="vert-tabs-home" aria-selected="false">Resultados General</a>
+													<a class="nav-link" id="tab_resultados_tab" href="<?php echo url_controlador("cuestionario","resultado", array("cat_cuest_modulo_id"=>""), true, true) ?>" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fas fa-chart-line mr-1"></i>Resultado General</a>
+													<a class="nav-link" id="tab_res_cmpte_tab" href="<?php echo url_controlador("cuestionario","res_cmpte", array("cat_cuest_modulo_id"=>""), true, true) ?>" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fas fa-chart-line mr-1"></i>Resultados por componente</a>
+													<a class="nav-link" id="tab_semaforo_tab" href="<?php echo url_controlador("cuestionario","semaforo", array("cat_cuest_modulo_id"=>""), true, true) ?>" role="tab" aria-controls="vert-tabs-home" aria-selected="false"><i class="fas fa-traffic-light mr-1"></i>Semáforo</a>
 												</div>
 											</div>
 											<div class="col-7 col-sm-9">
@@ -54,9 +70,12 @@
 													<form role="form" name="frm_cuest" id="frm_cuest" method="post" action="<?php echo url_controlador('cuestionario','guardar', array(), false) ?>">
 														<?php include 'modulos/Cuestionario/FrmMenu.php'; ?>
 														<?php include 'modulos/Cuestionario/EnFrmCero.php';?>
+														
 														<?php
 														if($controlador_obj->getCatCuestModuloId()){
+															include 'modulos/Cuestionario/AlertaValidaciones.php';
 															include_once 'modulos/Cuestionario/C01/TabMod'.$controlador_obj->getCatCuestModuloId().'.php';
+															include 'modulos/Cuestionario/AlertaFinSeccion.php';
 														}															
 														?>
 														<?php include 'modulos/Cuestionario/FrmMenu.php'; ?>
@@ -64,6 +83,12 @@
 													</div>
 													<div class="tab-pane text-left fade show" id="tab_resultados" role="tabpanel" aria-labelledby="tab_resultados_tab">
 														<?php include_once 'modulos/Cuestionario/C01/TabResultados.php';?>
+													</div>
+													<div class="tab-pane text-left fade show" id="tab_res_cmpte" role="tabpanel" aria-labelledby="tab_res_cmpte_tab">
+														<?php include_once 'modulos/Cuestionario/C01/TabResCmpte.php';?>
+													</div>
+													<div class="tab-pane text-left fade show" id="tab_semaforo" role="tabpanel" aria-labelledby="tab_semaforo_tab">
+														<?php include_once 'modulos/Cuestionario/C01/TabSemaforo.php';?>
 													</div>
 												</div>
 											</div>
@@ -73,14 +98,6 @@
 							</div>
 						</div>
 					</div><!-- /.container-fluid -->
-					
-									<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal_info">
-                  Launch Small Modal
-                </button>
-				
-					
-					
-					
 				</div><!-- /.content -->
 			</div>
 			<!-- /.content-wrapper -->

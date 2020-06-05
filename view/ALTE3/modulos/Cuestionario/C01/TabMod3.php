@@ -15,6 +15,7 @@
 		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p4', 'm2p4', array('lbl_txt'=>'4.¿Cuenta con  licencia de operación y dictamen de protección civil?')); ?></div>
 	</div>
 	<?php echo $controlador_obj->tag_campo->label('5. Especificaciones para las instalaciones de almacenamiento');?>
+	<p>Sólo aplique al tipo de instalación con que cuenta su CA.</p>
 	<div class="row">
 		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p5r1', 'm2p5r1', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Bodegas planas')); ?></div>
 		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p5r2', 'm2p5r2', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Silos')); ?></div>
@@ -90,10 +91,10 @@
 	</div>
 	<?php echo $controlador_obj->tag_campo->label('10. Control de inventarios');?>
 	<div class="row">
-		<div class="col-md-12"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p10r1', 'm2p10r1', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Registro de entradas y salidas del producto')); ?></div>
+		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p10r1', 'm2p10r1', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Registro de entradas y salidas del producto')); ?></div>
 	</div>
 	<div class="row">
-		<div class="col-md-12"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p10r2', 'm2p10r2', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Datos para la trazabilidad: peso bruto, peso tara, peso neto de la unidad, origen: localidad y productor, placas de tractor y remolque, nombre del conductor, fecha y hora de ingreso, descripción del producto, ciclo de producción.')); ?></div>
+		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p10r2', 'm2p10r2', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Datos para la trazabilidad: peso bruto, peso tara, peso neto de la unidad, origen: localidad y productor, placas de tractor y remolque, nombre del conductor, fecha y hora de ingreso, descripción del producto, ciclo de producción.')); ?></div>
 	</div>
 	<div class="row">
 		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p10r3', 'm2p10r3', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Inventarios físicos')); ?></div>
@@ -143,7 +144,7 @@
 	</div>
 	<?php echo $controlador_obj->tag_campo->label('14. Conservación del producto');?>
 	<div class="row">
-		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p14r1', 'm2p14r1', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Monitoreo del producto: Temperatura del granel, humedad, presencia de insectos, plagas, puntos de calentamiento, puntos de compactación, presencia de roedores, presencia de condensación en techos y paredes, presencia de materia extraña.')); ?></div>
+		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p14r1', 'm2p14r1', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Monitoreo del producto: temperatura del granel, humedad, presencia de insectos plaga, puntos de calentamiento, puntos de compactación, presencia de roedores, presencia de condensación en techos y paredes, presencia de materia extraña.')); ?></div>
 		<div class="col-md-6"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m2p14r2', 'm2p14r2', array('lbl_class'=>'lbl-sub', 'lbl_txt'=>'Encargado de monitoreo y conservación')); ?></div>
 	</div>
 	<div class="row">

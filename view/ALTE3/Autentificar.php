@@ -37,8 +37,8 @@
 							<div class="col-lg-8">
 								<div class="card">
 									<div class="card-body">
-										<h2 class="text-center">Cuestionario de autoevaluación diagnóstica</h2>
-										<h3 class="text-center">Fortalecimiento de los centros de acopio</h3>
+										<h2 class="text-center">Instrumento de autoevaluación</h2>
+										<h2 class="text-center text-primary">Fortalecimiento de los centros de acopio</h2>
 										<div class="text-center">
 											<img src="assets/img/img_portada.png">
 										</div>

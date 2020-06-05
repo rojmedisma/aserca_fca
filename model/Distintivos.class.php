@@ -45,6 +45,18 @@ class Distintivos{
 								"arr_pag_ant"=>array(
 										array("controlador"=>"cuestionario","accion"=>"vista")
 								)
+						),
+						"res_cmpte"=>array(
+								"titulo_pagina"=>"Cuestionario",
+								"arr_pag_ant"=>array(
+										array("controlador"=>"cuestionario","accion"=>"vista")
+								)
+						),
+						"semaforo"=>array(
+								"titulo_pagina"=>"Cuestionario",
+								"arr_pag_ant"=>array(
+										array("controlador"=>"cuestionario","accion"=>"vista")
+								)
 						)
 				),
 				

@@ -121,4 +121,70 @@ class Cuestionario{
 		}
 		return $cuest_cmp_val;
 	}
+	/**
+	 * A partir del arreglo que que contiene todo el detalle de registros de las tablas de cuestionario, imprime en pantalla una tabla HTML con las propiedades suficientes para poder ser reflejada en una archivo de tipo Excel.
+	 * @param string $and
+	 */
+	public function exportarExcel($and="", $arr_cmps_excluir=array()) {
+		$this->setArrTblCuestionario($and);
+		$arr_tbl_cuestionario = $this->getArrTblCuestionario();
+		//echo "<br>".json_encode($arr_tbl_cuestionario)."<br>";
+		
+		echo '<table>';
+		//Se imprime el título
+		echo '<thead>';
+		foreach ($arr_tbl_cuestionario as $arr_det){
+			echo '<tr>';
+			foreach ($arr_det as $cmp_tit=>$cmp_val){
+				if(!in_array($cmp_tit, $arr_cmps_excluir)){
+					echo '<th>'.$cmp_tit.'</th>';
+				}
+			}
+			echo '</tr>';
+			break;  //Me salgo en el primer registro
+		}
+		echo '</thead>';
+		echo '<tbody>';
+		foreach ($arr_tbl_cuestionario as $arr_det){
+			echo '<tr>';
+			foreach ($arr_det as $cmp_tit=>$cmp_val){
+				if(!in_array($cmp_tit, $arr_cmps_excluir)){
+					echo '<td>'.utf8_decode($cmp_val).'</td>'; //Mas adelante ver como quitar el utf8_decode
+				}
+			}
+			echo '</tr>';
+		}
+		echo '</tbody>';
+		echo '</table>';
+	}
+	/**
+	 * A partir del arreglo que que contiene todo el detalle de registros de las tablas de cuestionario, imprime en pantalla un archivo de texto en formato CSV.
+	 * @param string $and
+	 */
+	public function exportarCSV($and="", $arr_cmps_excluir=array()){
+		$this->setArrTblCuestionario($and);
+		$arr_tbl_cuestionario = $this->getArrTblCuestionario();
+		$arr_h = array();
+		foreach ($arr_tbl_cuestionario as $arr_det){
+			foreach ($arr_det as $cmp_tit=>$cmp_val){
+				if(!in_array($cmp_tit, $arr_cmps_excluir)){
+					$arr_h[] = '"'.$cmp_tit.'"';
+				}
+			}
+			break;  //Me salgo en el primer registro
+		}
+		echo implode(",", $arr_h);
+		echo "\n";
+		$arr_reemp = array("\\"=>"", "\""=>"'");
+		foreach ($arr_tbl_cuestionario as $arr_det){
+			$arr_b = array();
+			foreach ($arr_det as $cmp_tit=>$cmp_val){
+				if(!in_array($cmp_tit, $arr_cmps_excluir)){
+					$arr_b[] = '"'.str_replace(array_keys($arr_reemp), array_values($arr_reemp), utf8_decode($cmp_val)).'"';
+				}
+			}
+			echo implode(",", $arr_b);
+			echo "\n";
+		}
+	}
 }

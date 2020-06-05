@@ -1,6 +1,6 @@
 <!-- tab_m04 (Pestaña 4, Módulo 5) -->
 	<h5>Cuarto componente de la autoevaluación.</h5>
-	<h4>4 Gobierno corporativo</h4>
+	<h4>4. Gobierno corporativo</h4>
 	<?php if($controlador_obj->getCampoValor("persona_tipo")=="1"){?>
 	<h5 class="text-secondary">Tipo 1. Personas físicas</h5>
 	<div class="row">
