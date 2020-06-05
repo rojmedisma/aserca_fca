@@ -6,9 +6,18 @@
 ;3 Ejecutar los siguientes comandos
 ;Pasos para subir
 git init
-git pull https://github.com/rojmedisma/inaes_lb.git master
+git pull https://github.com/rojmedisma/aserca_fca.git master
 git add .
 git status
 git commit -m 'Versión Demo. Captura de cuestionario funcional con despliegue de reporte General'
-git remote add origin https://github.com/rojmedisma/inaes_lb.git master
-git push -u origin master
+git remote add origin https://github.com/rojmedisma/aserca_fca.git master
+git push -u origin mastergit
+
+;	*	*	Para actualizar
+git add .
+git status
+git commit -m 'Versión con toda la funcionalidad para la captura de cuestionarios'
+git remote add origin https://github.com/rojmedisma/aserca_fca.git master
+git push -u origin mastergit
+
+
