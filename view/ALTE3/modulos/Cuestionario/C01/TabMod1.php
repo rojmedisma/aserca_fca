@@ -31,7 +31,7 @@
 	<div class="row">
 		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contacto_correo',array('lbl_txt'=>'Correo electrónico')); ?></div>
 		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contacto_telefono',array('lbl_txt'=>'Teléfono')); ?></div>
-		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contact_whapp',array('lbl_txt'=>'Número de WhatsApp')); ?></div>
+		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpTexto('contact_whapp',array('lbl_txt'=>'Teléfono móvil')); ?></div>
 	</div>
 	<h5 class="text-secondary">IV Número de socios</h5>
 	<div class="row">

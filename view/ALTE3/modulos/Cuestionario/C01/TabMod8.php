@@ -1,5 +1,4 @@
 <!-- tab_m07 (Pestaña 7, Módulo 8) -->
-	<h5>Séptimo componente de la autoevaluación.</h5>
 	<h4>7. Sistemas de control y riesgos</h4>
 	<h5 class="text-secondary">1. Sistema administrativo</h5>
 	<div class="row">

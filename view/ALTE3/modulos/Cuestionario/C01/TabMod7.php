@@ -1,5 +1,4 @@
 <!-- tab_m06 (Pestaña 6, Módulo 7) -->
-	<h5>Sexto componente de la autoevaluación.</h5>
 	<h4>6. Evaluación financiera</h4>
 	<h5 class="text-secondary">1. Recursos financieros</h5>
 	

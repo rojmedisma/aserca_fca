@@ -37,7 +37,7 @@
 												
 												<div class="btn-group dropleft">
 													<?php if($controlador_obj->tienePermiso("nuevo_cuest") && $controlador_obj->tienePermiso("escritura")){?>
-													<a href="<?php echo url_controlador("cuestionario", "nuevo", true, true)?>" type="button" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Nuevo cuestionario</a>
+													<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_asig_c"><i class="fas fa-plus"></i> Nuevo cuestionario</button>
 													<?php }?>
 													<?php if($controlador_obj->tienePermiso("exportar")){?>
 													<a href="<?php echo url_controlador("cuestionario", "exportar", array("formato"=>"xls"), true, true)?>" type="button" class="btn btn-default btn-sm"><i class="fas fa-file-excel"></i> Exportar</a>
@@ -55,6 +55,8 @@
 											<tr>
 												<th>Opciones</th>
 												<th>Cuestionario Id</th>
+												<th>Usuario</th>
+												<th>Fecha creación</th>
 												<th>Nombre de la organización</th>
 												<th>Nombre de la o el representante</th>
 											</tr>
@@ -62,8 +64,15 @@
 										<tbody>
 											<?php foreach ($controlador_obj->getArrTblContenido() as $arr_cont){ ?>
 											<tr>
-												<td><a href="<?php echo url_controlador('cuestionario','forma', array('cuestionario_id'=>$arr_cont['cuestionario_id']), true, true) ?>" class="btn btn-primary btn-xs">Abrir</a></td>
+												<td>
+													<a href="<?php echo url_controlador('cuestionario','forma', array('cuestionario_id'=>$arr_cont['cuestionario_id']), true, true) ?>" class="btn btn-primary btn-xs">Abrir</a>
+													<?php if($controlador_obj->tienePermiso("borrar")){?>
+													<button data-cuest_id="<?php echo $arr_cont['cuestionario_id']; ?>" type="button" class="btn btn-danger btn-xs btn_borrar_c"><i class="fas fa-trash-alt"></i> Borrar</button>
+													<?php }?>
+												</td>
 												<td><?php echo $arr_cont['cuestionario_id']; ?></td>
+												<td><?php echo $arr_cont['usuario']; ?></td>
+												<td><?php echo $arr_cont['creacion_fecha']." ".$arr_cont['creacion_hora']; ?></td>
 												<td><?php echo $arr_cont['org_nombre']; ?></td>
 												<td><?php echo concatena_nombre($arr_cont['repre_nombre'],$arr_cont['repre_ap_paterno'],$arr_cont['repre_ap_materno']); ?></td>
 											</tr>
@@ -73,6 +82,8 @@
 											<tr>
 												<th>Opciones</th>
 												<th>Cuestionario Id</th>
+												<th>Usuario</th>
+												<th>Fecha creación</th>
 												<th>Nombre de la organización</th>
 												<th>Nombre de la o el representante</th>
 											</tr>
@@ -87,6 +98,7 @@
 			</div>
 			<!-- /.content-wrapper -->
 			<!-- Main Footer -->
+			<?php include_once 'modulos/Cuestionario/ModalAsigCuest.php'; ?>
 			<footer class="main-footer">
 				<?php include_once 'modulos/EnFooter.php'; ?>
 			</footer>

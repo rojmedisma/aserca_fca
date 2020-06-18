@@ -1,5 +1,4 @@
 <!-- tab_m01 -->
-	<h5>Primer componente de la autoevaluación.</h5>
 	<h4>1. Planificación estratégica</h4>
 	<div class="row">
 		<div class="col-md-8">

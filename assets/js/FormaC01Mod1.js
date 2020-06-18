@@ -118,31 +118,80 @@ var FormaC01Mod1 = function(){
 				};
 			}
 		}
-		// Themes begin
-		am4core.useTheme(am4themes_animated);
-		// Themes end
+		if(o_data.length < 3){
+			// Themes begin
+			am4core.useTheme(am4themes_animated);
+			// Create chart instance
+			var chart = am4core.create(nom_chart, am4charts.XYChart);
+			/* Add data */
+			chart.data = o_data;
+			
+			// Create axes
+			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+			categoryAxis.dataFields.category = "cat_cuest_modulo_desc";
+			categoryAxis.renderer.grid.template.location = 0;
+			categoryAxis.renderer.minGridDistance = 30;
 
-		/* Create chart instance */
-		var chart = am4core.create(nom_chart, am4charts.RadarChart);
+			// Create value axis
+			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+			valueAxis.max = 100;
+			valueAxis.min = 0;
 
-		/* Add data */
-		chart.data = o_data;
-		/* Create axes */
-		var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-		categoryAxis.dataFields.category = "cat_cuest_modulo_desc";
+			// Create series
+			var lineSeries = chart.series.push(new am4charts.LineSeries());
+			lineSeries.dataFields.valueY = "total_valora";
+			lineSeries.dataFields.categoryX = "cat_cuest_modulo_desc";
+			lineSeries.name = "valora";
+			lineSeries.strokeWidth = 3;
+			
+			// Add simple bullet
+			var circleBullet = lineSeries.bullets.push(new am4charts.CircleBullet());
+			circleBullet.circle.stroke = am4core.color("#fff");
+			circleBullet.circle.strokeWidth = 2;
 
-		var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-		valueAxis.renderer.axisFills.template.fill = chart.colors.getIndex(2);
-		valueAxis.renderer.axisFills.template.fillOpacity = 0.05;
-		valueAxis.max = 100;
-		valueAxis.min = 0;
+			var labelBullet = lineSeries.bullets.push(new am4charts.LabelBullet());
+			labelBullet.label.text = "{value}";
+			labelBullet.label.dy = -20;
+			
+		}else{
+			// Themes begin
+			am4core.useTheme(am4themes_animated);
+			// Themes end
 
-		/* Create and configure series */
-		var series = chart.series.push(new am4charts.RadarSeries());
-		series.dataFields.valueY = "total_valora";
-		series.dataFields.categoryX = "cat_cuest_modulo_desc";
-		series.name = "valora";
-		series.strokeWidth = 3;
+			/* Create chart instance */
+			var chart = am4core.create(nom_chart, am4charts.RadarChart);
+
+			/* Add data */
+			chart.data = o_data;
+			/* Create axes */
+			var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+			categoryAxis.dataFields.category = "cat_cuest_modulo_desc";
+
+			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+			valueAxis.renderer.axisFills.template.fill = chart.colors.getIndex(2);
+			valueAxis.renderer.axisFills.template.fillOpacity = 0.05;
+			valueAxis.max = 100;
+			valueAxis.min = 0;
+
+			/* Create and configure series */
+			var series = chart.series.push(new am4charts.RadarSeries());
+			series.dataFields.valueY = "total_valora";
+			series.dataFields.categoryX = "cat_cuest_modulo_desc";
+			series.name = "valora";
+			series.strokeWidth = 3;
+			
+			// Add simple bullet
+			//var circleBullet = series.bullets.push(new am4charts.CircleBullet());
+			//circleBullet.circle.stroke = am4core.color("#fff");
+			//circleBullet.circle.strokeWidth = 2;
+
+			//var labelBullet = series.bullets.push(new am4charts.LabelBullet());
+			//labelBullet.label.text = "{value}";
+			//labelBullet.label.dy = -20;
+			
+		}
+		
+		
 		
 		// Enable export
 		chart.exporting.menu = new am4core.ExportMenu();

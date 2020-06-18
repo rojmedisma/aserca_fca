@@ -1,5 +1,4 @@
 <!-- tab_m05 (Pestaña 5, Módulo 6) -->
-	<h5>Quinto componente de la autoevaluación.</h5>
 	<h4>5. Modelo de negocio</h4>
 	<h5 class="text-secondary">1. Dinámica de mercado</h5>
 	<?php echo $controlador_obj->tag_campo->label('Mercado objetivo');?>

@@ -1,5 +1,4 @@
 <!-- tab_m02 (Pestaña 2, Módulo 3) -->
-	<h5>Segundo componente de la autoevaluación.</h5>
 	<h4>2. Operación e infraestructura</h4>
 	<h5 class="text-secondary">Instalaciones</h5>
 	<div class="row">

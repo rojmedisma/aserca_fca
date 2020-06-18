@@ -5,4 +5,9 @@ El instrumento es un cuestionario que se captura por secciones o módulos, estos
 
 **Versión 1.0.6**
 
-Versión con toda la funcionalidad para la captura de cuestionarios
+Versión con toda la funcionalidad para la captura de cuestionarios.
+
+**Versión 1.1**
+
+Se agregó el formulario para el catálogo de usuarios.
+Asignación de cuestionarios a usuarios con en el botón Nuevo cuestionario.

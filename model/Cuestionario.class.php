@@ -187,4 +187,12 @@ class Cuestionario{
 			echo "\n";
 		}
 	}
+	/**
+	 * Marca como borrado el cuestionario con el Id indicado en el argumento
+	 * @param string $cuestionario_id
+	 */
+	public function borrar($cuestionario_id){
+		$qry = "UPDATE `".$this->bd->getBD()."`.`c00` SET `borrar` = '1' WHERE `cuestionario_id` = '".$cuestionario_id."';";
+		$this->bd->ejecutaQry($qry);
+	}
 }

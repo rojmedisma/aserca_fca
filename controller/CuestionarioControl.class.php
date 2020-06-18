@@ -27,6 +27,7 @@ class CuestionarioControl extends ControladorBase{
 	private $es_lectura = false;
 	private $arr_cmps_cat_cuest_modulo = array();	//Detalle de campos de la tabla cat_cuest_modulo del cat_cuest_modulo_id actual
 	private $arr_cat_cuest_modulo_control = array();
+	private $arr_usuarios_cap = array();
 	public function __construct(){
 		$this->cat_cuestionario_id = (isset($_REQUEST['cat_cuestionario_id']))? intval($_REQUEST['cat_cuestionario_id']) : "1";
 		$this->cuestionario_id = (isset($_REQUEST['cuestionario_id']))? $_REQUEST['cuestionario_id'] : "";
@@ -44,7 +45,13 @@ class CuestionarioControl extends ControladorBase{
 		$this->setArrPermiso("aprobar", $this->permiso->tiene_permiso($cuet_cve.'_aprob'));
 		$this->setArrPermiso("exportar", $this->permiso->tiene_permiso($cuet_cve.'_exportar'));
 		$this->setArrPermiso("borrar", $this->permiso->tiene_permiso($cuet_cve.'_borrar'));
+		
+		$this->setArrPermiso("ver_todo", $this->permiso->tiene_permiso($cuet_cve.'_nac'));
+		$this->setArrPermiso("ver_asignados", $this->permiso->tiene_permiso($cuet_cve.'_asig'));
+		
+		
 		$this->setArrPermiso("ver_cmp_nom", $this->permiso->tiene_permiso('ver_cmp_nom'));
+		$this->setArrPermiso("cat_usuario", $this->permiso->tiene_permiso('al_usuario'));
 		
 	}
 	/**
@@ -58,15 +65,28 @@ class CuestionarioControl extends ControladorBase{
 			$this->cuestionario_id = "";
 			$cuestionario = new Cuestionario($this->getCatCuestionarioId());
 			//$this->setAndCuest();
-			$and_c = "";
+			
+			
+			if($this->tienePermiso("ver_todo")){
+				$and_c = "";
+			}elseif($this->tienePermiso("ver_asignados")){
+				$arr_reg_usuario = $this->getArrRegUsuario();
+				$cat_usuario_id = $arr_reg_usuario['cat_usuario_id'];
+				$and_c = " AND `cat_usuario_id` = '".$cat_usuario_id."' ";
+			}else{
+				$and_c = " AND FALSE";
+			}
 			$cuestionario->setArrTblCuestionario($and_c);
 			$this->arr_tbl_cue = $cuestionario->getArrTblCuestionario();
+			
+			$this->setArrUsuariosCap();	//Se genera arreglo de usuarios de captura
 			
 			
 			$nom_arc_vista = strtoupper(cuest_cve($this->getCatCuestionarioId()))."Vista.php";
 			$this->setMostrarVista($nom_arc_vista);
 		}else{
 			redireccionar("error","sin_arg_cat_cuestionario_id");
+			die();
 		}
 	}
 	/**
@@ -101,6 +121,7 @@ class CuestionarioControl extends ControladorBase{
 			
 		}else{
 			redireccionar("error","sin_id_cuest");
+			die();
 		}
 		$this->arr_validaciones = $arr_validaciones;
 		
@@ -134,10 +155,10 @@ class CuestionarioControl extends ControladorBase{
 	 */
 	public function guardar(){
 		$ccm_siguiente = (isset($_REQUEST['ccm_siguiente']))? intval($_REQUEST['ccm_siguiente']) : "";
-		;
 		
 		if(!$this->getCatCuestModuloId()){
 			redireccionar("error","sin_arg_cat_cuest_modulo_id");
+			die();
 		}
 		if($this->tienePermiso("escritura")){
 			$bd = new BaseDatos();
@@ -147,6 +168,7 @@ class CuestionarioControl extends ControladorBase{
 			$arr_lista_tablas = $cat_cuest_modulo->getArrCmpListaTablas();
 			if(empty($arr_lista_tablas)){
 				redireccionar("error","valor_de_campo_vacio", array("tbl_nom"=>"cat_cuest_modulo", "cmp_nom"=>"lista_tablas"));
+				die();
 			}
 			$arr_cmps = array();
 			foreach ($arr_lista_tablas as $tabla){
@@ -173,6 +195,7 @@ class CuestionarioControl extends ControladorBase{
 			$this->actualizaValidacionesJSON();
 		}else{
 			redireccionar('error','sin_permisos', array('tit_accion'=>'Guardar cuestionario'));
+			die();
 		}
 		//$nom_arc_vista = strtoupper(cuest_cve($this->getCatCuestionarioId()))."Forma.php";
 		
@@ -187,11 +210,20 @@ class CuestionarioControl extends ControladorBase{
 		
 	}
 	public function nuevo(){
+		$cat_usuario_id = (isset($_REQUEST['cat_usuario_id']))? intval($_REQUEST['cat_usuario_id']) : 0;
 		if(!$this->tienePermiso("nuevo_cuest") || !$this->tienePermiso("escritura")){
 			redireccionar('error','sin_permisos', array('tit_accion'=>'Guardar cuestionario'));
+			die();
 		}
 		if($this->getCatCuestionarioId()==""){
 			redireccionar("error","sin_arg_cat_cuestionario_id");
+			die();
+		}
+		if(!$cat_usuario_id){
+			$tit_error = "Cuestionario sin usuario asignado";
+			$txt_error = "No se pudo crear el cuestionario debido a que no se asignó el usuario responsable para su captura";
+			redireccionar("error","inicio", array("tit_error"=>$tit_error, "txt_error"=>$txt_error));
+			die();
 		}
 		
 		$cat_cuest_modulo = new CatCuestModulo($this->getCatCuestionarioId());
@@ -199,11 +231,12 @@ class CuestionarioControl extends ControladorBase{
 		$arr_lista_tablas = $cat_cuest_modulo->getArrCmpListaTablas();
 		if(empty($arr_lista_tablas)){
 			redireccionar("error","valor_de_campo_vacio", array("tbl_nom"=>"cat_cuest_modulo", "cmp_nom"=>"lista_tablas"));
+			die();
 		}
 		
 		//Se guarda el registro actualizando los valores y tablas indicadas en el arreglo $arr_cmps
 		$guardar = new Guardar();
-		$guardar->setNuevoCuestionario($arr_lista_tablas, $this->getCatCuestionarioId());
+		$guardar->setNuevoCuestionario($arr_lista_tablas, $this->getCatCuestionarioId(), $cat_usuario_id);
 		$this->cuestionario_id = $guardar->getCmpIdVal();
 		redireccionar('cuestionario','forma', $this->arrRedirecForma());
 	}
@@ -265,7 +298,7 @@ class CuestionarioControl extends ControladorBase{
 		
 		$ahora = date('Ymd_hi');
 		$archivo = cuest_cve($this->getCatCuestionarioId()).'_'.$ahora;
-		$arr_cmps_excluir = array("cat_estado_id","json_parametros","m3p2","m3p2_desc");
+		$arr_cmps_excluir = array("cat_estado_id","json_parametros","json_validaciones","m3p2","m3p2_desc");
 		switch($formato){
 			case 'xls':
 				
@@ -288,7 +321,22 @@ class CuestionarioControl extends ControladorBase{
 		}
 		
 	}
-	
+	/**
+	 * Acción para marcar como borrado el cuestionario seleccionado
+	 */
+	public function borrar(){
+		if($this->tienePermiso("borrar")){
+			$cuestionario = new Cuestionario($this->getCatCuestionarioId());
+			$cuetionario_id = $this->getCuestionarioId();
+			$cuestionario->borrar($cuetionario_id);
+			$log = new log();
+			$log->setRegLog("cuetionario_id", $cuetionario_id, "borrar", "Aviso", "Se borró cuestionario");
+			redireccionar('cuestionario','vista',array('cuestionario_id'=>$cuetionario_id));
+		}else{
+			redireccionar('error','sin_permisos', array('tit_accion'=>'Borrar cuestionario'));
+			die();
+		}
+	}
 	/**
 	 * Devuelve el valor de la variable <strong>cuestionario_id</strong>
 	 * @return integer
@@ -388,6 +436,7 @@ class CuestionarioControl extends ControladorBase{
 	private function setForma(){
 		if($this->getCatCuestionarioId()==""){
 			redireccionar("error","sin_arg_cat_cuestionario_id");
+			die();
 		}
 		
 		$cat_cuest_modulo = new CatCuestModulo($this->getCatCuestionarioId());
@@ -560,5 +609,17 @@ class CuestionarioControl extends ControladorBase{
 		}else{
 			return 0;
 		}
+	}
+	/**
+	 * Genera arreglo con la lista de usuarios que pueden ser asignados para capturar cuestionarios
+	 */
+	private function setArrUsuariosCap(){
+		$usuario = new Usuario();
+		$and = " AND `cat_grupo_id` = 4 AND `activo` = 1 ORDER BY `cat_usuario`.`ap_paterno` ASC, `cat_usuario`.`ap_materno` ASC, `cat_usuario`.`nombre` ASC";
+		$usuario->setArrTblCatUsuario($and);
+		$this->arr_usuarios_cap = $usuario->getArrTblCatUsuario();
+	}
+	public function getArrUsuariosCap(){
+		return $this->arr_usuarios_cap;
 	}
 }

@@ -11,13 +11,12 @@ git add .
 git status
 git commit -m 'Versión Demo. Captura de cuestionario funcional con despliegue de reporte General'
 git remote add origin https://github.com/rojmedisma/aserca_fca.git master
-git push -u origin mastergit
+git push -u origin master
 
 ;	*	*	Para actualizar
 git add .
 git status
-git commit -m 'Versión con toda la funcionalidad para la captura de cuestionarios'
-git remote add origin https://github.com/rojmedisma/aserca_fca.git master
-git push -u origin mastergit
+git commit -m 'Se agregó el formulario para el catálogo de usuarios, además de la asignación de cuestionarios en el botón Nuevo cuestionario'
+git push -u origin master
 
 

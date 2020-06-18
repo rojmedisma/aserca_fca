@@ -31,7 +31,7 @@ class Distintivos{
 				),
 				"cuestionario"=>array(
 						"vista"=>array(
-								"titulo_pagina"=>"Vista",
+								"titulo_pagina"=>"Vista cuestionario",
 								"arr_pag_ant"=>array()
 						),
 						"forma"=>array(
@@ -61,16 +61,17 @@ class Distintivos{
 				),
 				
 				"cat_usuario"=>array(
-						"inicio"=>array(
+						"vista"=>array(
 								"titulo_pagina"=>"Catálogo de usuarios",
 								"arr_pag_ant"=>array(
-										array("controlador"=>"tablero","accion"=>"inicio")
+										array("controlador"=>"cuestionario","accion"=>"vista")
 								)
 						),
-						"abrir"=>array(
+						"forma"=>array(
 								"titulo_pagina"=>"Formulario de usuario",
 								"arr_pag_ant"=>array(
-										array("controlador"=>"cat_usuario","accion"=>"inicio")
+										array("controlador"=>"cat_usuario","accion"=>"vista"),
+										array("controlador"=>"cuestionario","accion"=>"vista")
 								)
 						)
 				),

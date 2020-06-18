@@ -10,7 +10,10 @@
 			<!-- Rojo. Nivel 3 -->
 			<div class="alert alert-danger alert-dismissible">
 				<h5><i class="fas fa-traffic-light mr-1"></i>Débil, amplias oportunidades de desarrollo</h5>
-				Acceso limitado al financiamiento, bajo esquemas competitivos, que permitan el desarrollo de la empresa, los indicadores financieros observan acciones a implementar para mejorar la posición ante las entidades financieras.
+				<p>Acceso limitado al financiamiento, bajo esquemas competitivos, que permitan el desarrollo de la empresa, los indicadores financieros observan acciones a implementar para mejorar la posición ante las entidades financieras.</p>
+				<p>Los elementos de administración y organización, requieren de desarrollar e implementar acciones para mejorar los procesos.</p>
+				<p>Se accede a un mercado limitado de compradores que comúnmente imponen los precios de salida, no se ofrecen servicios asociados que generan valor al producto.</p>
+				<p>La infraestructura es limitada y no permite procesos de conservación. Las maniobras del producto se llevan a cabo de manera manual.</p>
 			</div>
 			<?php }elseif($controlador_obj->getValorSemaforo('nivel_semaforo')==2){?>
 			<!-- Amarillo. Nivel 2 -->

@@ -1,13 +1,4 @@
 <!-- Para MMLIndicadorVista -->
-		<script>
-			$(document).ready(function(){
-				$('#tbl_cuest_vista').DataTable({
-					"paging": true,
-					"lengthChange": true,
-					"searching": true,
-					"ordering": true,
-					"info": true,
-					"autoWidth": false,
-				});
-			});
-		</script>
+	<!-- Select2 -->
+	<script src="/<?php echo DIR_LOCAL; ?>/library/ALTE3/plugins/select2/js/select2.full.min.js"></script>
+	<script src="/<?php echo DIR_LOCAL; ?>/assets/js/Vista.js"></script>
