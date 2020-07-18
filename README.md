@@ -11,3 +11,8 @@ Versión con toda la funcionalidad para la captura de cuestionarios.
 
 Se agregó el formulario para el catálogo de usuarios.
 Asignación de cuestionarios a usuarios con en el botón Nuevo cuestionario.
+
+**Versión 1.1.2**
+En el registro de log, se agregó columna para almacenar la dirección remota (REMOTE_ADDR).
+En el semáforo se agregó tabla de Puntos de alerta
+En el módulo de Datos generales, se bloqueó la pregunta "Tipos de persona" despues de ser llenada.

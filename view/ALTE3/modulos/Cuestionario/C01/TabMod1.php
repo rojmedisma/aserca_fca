@@ -2,7 +2,7 @@
 	<h4>Datos Generales del Centro de Acopio</h4>
 	<h5 class="text-secondary">I Datos del centro de acopio</h5>
 	<div class="row">
-		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('persona_tipo', 'persona_tipo', array('lbl_txt'=>'Tipo de persona')); ?></div>
+		<div class="col-md-4"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('persona_tipo', 'persona_tipo', array('lbl_txt'=>'Tipo de persona', 'lectura'=>$controlador_obj->getPersonaTipoLec())); ?></div>
 	</div>
 	<div id="div_org">
 		<div class="row">

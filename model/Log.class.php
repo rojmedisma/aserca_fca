@@ -28,6 +28,7 @@ class Log{
 				"evento"=>txt_sql($evento),
 				"estatus"=>txt_sql($estatus),
 				"descripcion"=>txt_sql($descripcion),
+				"remote_addr"=>txt_sql($_SERVER['REMOTE_ADDR']),
 		);
 		$this->bd->ejecutaQryInsertDeArr($arr_insert, 'log');
 	}

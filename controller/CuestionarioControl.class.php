@@ -28,6 +28,7 @@ class CuestionarioControl extends ControladorBase{
 	private $arr_cmps_cat_cuest_modulo = array();	//Detalle de campos de la tabla cat_cuest_modulo del cat_cuest_modulo_id actual
 	private $arr_cat_cuest_modulo_control = array();
 	private $arr_usuarios_cap = array();
+	private $persona_tipo_lec = false;
 	public function __construct(){
 		$this->cat_cuestionario_id = (isset($_REQUEST['cat_cuestionario_id']))? intval($_REQUEST['cat_cuestionario_id']) : "1";
 		$this->cuestionario_id = (isset($_REQUEST['cuestionario_id']))? $_REQUEST['cuestionario_id'] : "";
@@ -117,6 +118,12 @@ class CuestionarioControl extends ControladorBase{
 			if($p_es_modulo_activo){
 				$llave_ccm_val = "ccm_id".$this->getCatCuestModuloId();
 				$arr_validaciones = (array) $this->validaciones_JSON->getValor($llave_ccm_val);
+				if($this->getCatCuestModuloId()==1){
+					if($this->getCampoValor("persona_tipo")!=""){
+						$this->persona_tipo_lec = true;
+					}
+					
+				}
 			}
 			
 		}else{
@@ -147,6 +154,13 @@ class CuestionarioControl extends ControladorBase{
 		}
 		
 		$nom_arc_vista = strtoupper(cuest_cve($this->getCatCuestionarioId()))."Forma.php";
+		
+		//se regitra en el log cuando entran a una sección en modo edición
+		if(!$es_lectura){
+			$log = new Log();
+			$log->setRegLog('cuestionario_id', $this->getCuestionarioId(), 'forma', 'Aviso', 'Ingreso a cat_cuest_modulo_id: '.$this->getCatCuestModuloId().' en modo edición');
+		}
+		
 		$this->setMostrarVista($nom_arc_vista);
 	}
 	
@@ -621,5 +635,8 @@ class CuestionarioControl extends ControladorBase{
 	}
 	public function getArrUsuariosCap(){
 		return $this->arr_usuarios_cap;
+	}
+	public function getPersonaTipoLec(){
+		return $this->persona_tipo_lec;
 	}
 }

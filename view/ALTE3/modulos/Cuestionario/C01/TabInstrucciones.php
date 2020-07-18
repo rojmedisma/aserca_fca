@@ -15,7 +15,7 @@
 		<li>Sistemas de control y riesgos</li>
 	</ol>
 	<p>Cada uno de estos componentes contribuyen, en mayor o menor medida, a que el centro de acopio opere con mejores resultados.</p>
-	<h5 class="text-primary">¿Cómo llenar el instrumento de diagnóstico?</h5>
+	<h5 class="text-primary">¿Cómo llenar el instrumento de autoevaluación?</h5>
 	<p>El cuestionario consta de 7 componentes, los cuales deben ser alimentados con la información que disponga el operador o administrador del centro de acopio. El cuestionario le irá conduciendo automáticamente a la siguiente sección que deberá responder.</p>
 	<p>Al final del cuestionario se mostrarán los resultados en tres secciones:</p>
 	<ol>

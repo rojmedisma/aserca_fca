@@ -28,7 +28,7 @@
 		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m1p5', 'm1p5', array('lbl_txt'=>'5. ¿Se cuenta con un documento donde esté plasmada la visión de la empresa?')); ?></div>
 	</div>
 	<div class="row">
-		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m1p6', 'm1p6', array('lbl_txt'=>'6. ¿Cuentan con una estrategia de contingencias en relación a los riesgos del mercado y de la producción?')); ?></div>
+		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m1p6', 'm1p6', array('lbl_txt'=>'6. ¿Se cuenta con una estrategia de contingencia para mitigar los riesgos de la producción y del mercado?')); ?></div>
 	</div>
 	<div class="row">
 		<div class="col-md-8"><?php echo $controlador_obj->tag_campo->cmpSelectDeSubCat('m1p7', 'm1p7', array('lbl_txt'=>'7. ¿Existe evidencia de las estrategias aplicadas para el logro de metas?')); ?></div>

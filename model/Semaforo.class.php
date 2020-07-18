@@ -219,8 +219,17 @@ class Semaforo{
 					$log->setRegLog("cuestionario_id", $this->cuestionario_id, "Semaforo.class.php", "Error", "Id de indicador no identificado");
 					
 		}
-		$ptos_maximos = ($num_reactivos_val_normal*$valor_5);
+		$ptos_maximos = (($num_reactivos_val_normal*$valor_5) + ($num_reactivos_val_2*$valor_doble));
 		$porc_logros = op_division($i_ptos_pond, $ptos_maximos);
+		
+		$bg_class_color = "";
+		if($porc_logros<0.5){
+			$bg_class_color ="table-danger";
+		}elseif($porc_logros>=0.5 && $porc_logros<=0.8){
+			$bg_class_color ="table-warning";
+		}elseif($porc_logros>0.8){
+			$bg_class_color ="table-success";
+		}
 		
 		$arr_indicador = array(
 				'id'=>$indicador_id,
@@ -234,6 +243,7 @@ class Semaforo{
 				'valor_doble'=>$valor_doble,
 				'ptos_maximos'=>$ptos_maximos,
 				'porc_logros'=>$porc_logros,
+				'bg_class_color'=>$bg_class_color,
 		);
 		
 		$this->arr_indicador = $arr_indicador;

@@ -68,6 +68,7 @@
 													</div>
 													<div class="tab-pane text-left fade show" id="tab_mod<?php echo $controlador_obj->getCatCuestModuloId(); ?>" role="tabpanel" aria-labelledby="tab_mod<?php echo $controlador_obj->getCatCuestModuloId(); ?>_tab">
 													<form role="form" name="frm_cuest" id="frm_cuest" method="post" action="<?php echo url_controlador('cuestionario','guardar', array(), false) ?>">
+														<!-- cuestionario_id: <?php echo $controlador_obj->getCuestionarioId(); ?> -->
 														<?php include 'modulos/Cuestionario/FrmMenu.php'; ?>
 														<?php include 'modulos/Cuestionario/EnFrmCero.php';?>
 														

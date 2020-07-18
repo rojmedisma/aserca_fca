@@ -42,3 +42,31 @@
 			<?php }?>
 		</div>
 	</div>
+	<h5>Puntos de alerta</h5>
+	<?php
+	$arr_op_indicador = $controlador_obj->getValorSemaforo("arr_op_indicador");
+	?>
+	<div class="row">
+		<div class="col-md-6">
+			<?php if(count($arr_op_indicador)){?>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Indicador a medir</th>
+						<th>Porcentaje alcanzado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($arr_op_indicador as $ind_id=>$arr_ind_det){
+						$porc_logros = $arr_ind_det['porc_logros']*100;
+					?>
+					<tr>
+						<td><?php echo $arr_ind_det['titulo'];?></td>
+						<td class="<?php echo $arr_ind_det['bg_class_color'];?>" style="text-align: right;"><?php echo formato_miles($porc_logros, 0);?> %</td>
+					</tr>
+					<?php }?>
+				</tbody>
+			</table>
+			<?php }?>
+		</div>
+	</div>
